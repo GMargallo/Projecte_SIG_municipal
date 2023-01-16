@@ -314,27 +314,3 @@ update habitpar set ppar_noed_d = 0 where tpar = 0;
 update habitpar set ppar_noed = ( cast(hpar_noed as double precision) / cast(tpar as double precision) ) * 100
 	where tpar > 0;
 update habitpar set ppar_noed = 0 where tpar = 0;
-
-
-
-/*VISUALIZACION EN ARCGIS Y PRESENTACIÓN DE RESULTADOS
-
-PARA VISUALIZAR LOS DATOS EN ARCGIS, 
-1- Arrastrar la capa PARCELA des de la Geodatabase personal (BDE) a ArcMAP.
-2- Connectar ArcMAP con la Base de Datos (BBDD) alfanumérica de PostgreSQL (Catalog > Database Connections)
-3- Arrastrar la tabla BBDD.HABITPAR a ArcMAP y definir el atributo REFCAD_PAR como identificador único.
-4- HACER UN JOIN ENTRE BDE.PARCELA Y BBDD.HABITPAR, a través del campo común REFCAD y REFCAD_PAR respectivamente
-
-Luego ya se pueden simbolizar las parcelas con una escala graduada de colores por el campo deseado.
-Recomiendo hacer 5 mapas:
-1- Porcentaje total de hombres (phom)
-2- Porcentaje total de mujeres (pdon)
-3- Porcentaje total de personas menores de 14 años (ppar_14)
-4- Porcentaje total de personas entre 15 y 64 años (ppar_64)
-5- Porcentaje total de personas mayores de 65 años (ppar_65)
-
-
-En la memoria, se recomienda añadir un zoom del modelo logico o crear un esquema sintético 
-para que se vean las tablas relacionadas y los campos utilizados.
-Recordad poner el enunciado de la consulta que habeis hecho.
-*/
