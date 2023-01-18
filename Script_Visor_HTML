@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visor simple con Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style type="text/css">
+        #mapid { height: 98vh; width: 99vw;}
+    </style>
+</head>
+<body>
+    <div id="mapid"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-hash/0.2.1/leaflet-hash.min.js" integrity="sha512-0A4MbfuZq5Au9EdpI1S5rUTXlibNBi8CuZ/X3ycwXyZiCjNzpiO9YH6EMqPgzZm6vfNCuZStBQHjnO17nIC0IQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.wms@0.2.0/dist/leaflet.wms.min.js"></script>
+    <script>
+        //Creamos el objeto mapa.
+        const map = L.map('mapid',{
+            maxZoom: 25,
+            zoomSnap: 0,
+            zoomDelta: 0.5
+        }).setView([41.325, 2.040326], 13);
+
+        var hash = new L.Hash(map);
+
+        const osm = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 18
+        }).addTo(map);
+        // C:\Users\aulall\Desktop\ProyectoQGZ\ProyectoQGS\ProyectoQGS.qgs
+
+        //ALTRES ------------------------------------------------------------
+
+        const wmsqualificacio = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Qualificacio',
+        transparent: true,
+        format: "image/png",
+        minZoom: 16.5,
+        maxZoom: 18,
+        }).addTo(map);
+
+        const wmsclass = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Classificacio',
+        transparent: true,
+        format: "image/png",
+        minZoom: 15.5,
+        maxZoom: 18,
+        }).addTo(map);
+
+        const wmscarrers = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Carrers',
+        transparent: true,
+        format: "image/png",
+        minZoom: 17.5,
+        maxZoom: 20,
+        }).addTo(map);
+
+        const wmspoligons = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Poligons',
+        transparent: true,
+        format: "image/png",
+        minZoom: 17.5,
+        maxZoom: 24,
+        }).addTo(map);
+        
+        const wmsedificis = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Edificis',
+        transparent: true,
+        format: "image/png",
+        minZoom: 17.5,
+        maxZoom: 24,
+        }).addTo(map);
+
+        const wmssector = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Sector_desenvolupament',
+        transparent: true,
+        format: "image/png",
+        minZoom: 16.5,
+        maxZoom: 17.5,
+        }).addTo(map);
+
+        const wmscatalog = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Element_catalogat',
+        transparent: true,
+        format: "image/png",
+        minZoom: 16.5,
+        maxZoom: 17.5,
+        }).addTo(map);
+
+        const wmsndvi = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'NDVI_2021',
+        transparent: true,
+        format: "image/png",
+        tileSize: 512,
+        minZoom: 14,
+        }).addTo(map);
+
+
+        //DIVISIONS
+
+        const wmsparcela = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Parcela',
+        transparent: true,
+        format: "image/png",
+        minZoom: 18,
+        maxZoom: 25,
+        }).addTo(map);
+
+        const wmssubpar = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Subparcela',
+        transparent: true,
+        tileSize: 512,
+        format: "image/png",
+        minZoom: 18,
+        maxZoom: 25,
+        }).addTo(map);
+
+
+        const wmsilles = L.WMS.overlay('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Illes_censals',
+        transparent: true,
+        format: "image/png",
+        minZoom: 17.5,
+        maxZoom: 24,
+        }).addTo(map);
+        
+
+        const wmsbarris = L.WMS.overlay('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Barris',
+        transparent: true,
+        format: "image/png",
+        minZoom: 14,
+        maxZoom: 16,
+        }).addTo(map);
+
+        const wmsdistrictes = L.WMS.overlay('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Districtes',
+        transparent: true,
+        format: "image/png",
+        //minZoom: 13,
+        maxZoom: 14,
+        }).addTo(map);
+
+
+        //PUNTS------------------------------------------------------------------
+
+        const wmsportals = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Portals',
+        transparent: true,
+        format: "image/png",
+        minZoom: 17.5,
+        maxZoom: 24,
+        }).addTo(map);
+
+        const wmsarbres = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Arbres',
+        transparent: true,
+        format: "image/png",
+        minZoom: 17.5,
+        maxZoom: 24,
+        }).addTo(map);
+              
+
+        //OPCIONALS-----------------------------------------------------------------
+
+        const wmsareaservei = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Area_de_Servei',
+        transparent: true,
+        format: "image/png"
+        });
+
+        const wmsndviruta = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'NDVI_Ruta',
+        transparent: true,
+        format: "image/png",
+        maxZoom: 24,
+        });
+
+        const wmsalternatiu = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Itinerari_alternatiu',
+        transparent: true,
+        format: "image/png",
+        maxZoom: 24,
+        });
+
+        const wmsverd = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Itinerari_verd',
+        transparent: true,
+        format: "image/png",
+        maxZoom: 24,
+        });
+
+        const wmsequip = L.tileLayer.wms('http://localhost/cgi-bin/qgis_mapserv.fcgi.exe?map=C:/Users/aulall/Desktop/ProyectoQGZ/ProyectoQGS/ProyectoQGZ.qgs', {
+        layers: 'Equipaments',
+        transparent: true,
+        format: "image/png",
+        maxZoom: 24,
+        });
+
+
+
+
+        var overlays = {
+            "Equipaments": wmsequip,
+            "Ruta Verda": wmsverd,
+            "Ruta alternativa": wmsalternatiu,
+            "Area de servei": wmsareaservei,
+            "Verd urbà de la ruta": wmsndviruta,
+        };
+
+        var baseLayers = {
+            "OpenStreetMap": osm
+        };
+
+        L.control.layers(baseLayers, overlays).addTo(map);
+        L.control.scale().addTo(map);
+        
+    </script>
+</body>
+</html>
